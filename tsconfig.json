@@ -1,0 +1,10 @@
+{
+	"include": [
+		"./**/*"
+	],
+	"compilerOptions": {
+		"sourceMap": true,
+		"noImplicitAny": true,
+		"removeComments": true
+	}
+}
