@@ -20,7 +20,14 @@
 		<script type="text/javascript">
 			var players = ["Alex", "Anton", "Nino", "Nick", "Daniel"];
 			var game = new Game(players);
-			var bot = new Bot(game);
+			var playerTactics = {
+				Alex: 1,
+				Anton: 1,
+				Nino: 1,
+				Nick: 1,
+				Daniel: 10
+			};
+			var bot = new Bot(game, playerTactics);
 		</script>
 
 	</body>

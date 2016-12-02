@@ -4,22 +4,28 @@ class Bot {
 	stateRolled: number;
 	stateLastPlayer: string;
 	interval: number;
-	constructor(game: Game) {
+	saveRate: { [name: string]: number };
+	constructor(game: Game, saveRate: { [name: string]: number }) {
 		// this.outputDomElement = outputDomElement;
 		this.game = game;
 		this.stateRolled = 0;
 		this.stateLastPlayer = "";
 		// this.interval = setInterval(() => {this.step(outputDomElement); }, 100);
+		this.saveRate = saveRate;
+	}
+	public setSaveRate(saveRate: { [name: string]: number }) {
+		this.saveRate = saveRate;
 	}
 	private step(output: HTMLTextAreaElement, diceOutput: HTMLTextAreaElement): void {
 		if (this.game.currentScore === 100) {
+			this.game.stop();
 			this.stop();
 		}
 		if (this.game.currentPlayer !== this.stateLastPlayer) {
 			this.stateRolled = 0;
 			this.stateLastPlayer = this.game.currentPlayer;
 		}
-		if (this.stateRolled === 1 || this.game.checkCrossable() || (this.stateRolled > 0 && this.game.checkSchnappsZahl())) {
+		if (this.stateRolled === this.saveRate[this.game.currentPlayer] || this.game.checkCrossable() || (this.stateRolled > 0 && this.game.checkSchnappsZahl())) {
 			this.game.stop();
 			if (this.game.won()) {
 				this.stop();
