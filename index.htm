@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<script src="src/Game.js"></script>
+	</head>
+
+	<body onload="document.getElementById('output').innerHTML = game.toString();">
+		<textarea id="output" rows="10"></textarea>
+		<textarea id="diceOutput" rows="10"></textarea>
+		<br>
+		<button onclick="document.getElementById('diceOutput').innerHTML += '\n' + game.roll(); document.getElementById('output').innerHTML = game.toString();">roll</button>
+		<button onclick="game.stop(); document.getElementById('output').innerHTML = game.toString();">write down</button>
+		<br>
+		<input type="number" id="speed" value="1000">
+		<button onclick="bot.start(document.getElementById('speed').value, document.getElementById('output'), document.getElementById('diceOutput'))">start bot</button>
+		<button onclick="bot.stop()">stop bot</button>
+
+		
+		<script type="text/javascript">
+			var players = ["Alex", "Anton", "Nino", "Nick", "Daniel"];
+			var game = new Game(players);
+			var bot = new Bot(game);
+		</script>
+
+	</body>
+</html>
