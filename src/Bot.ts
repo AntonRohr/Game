@@ -20,16 +20,19 @@ class Bot {
 		if (this.game.currentScore === 100) {
 			this.game.stop();
 			this.stop();
+			return;
 		}
 		if (this.game.currentPlayer !== this.stateLastPlayer) {
 			this.stateRolled = 0;
 			this.stateLastPlayer = this.game.currentPlayer;
 		}
 		if (this.stateRolled === this.saveRate[this.game.currentPlayer] || this.game.checkCrossable() || (this.stateRolled > 0 && this.game.checkSchnappsZahl())) {
-			this.game.stop();
 			if (this.game.won()) {
 				this.stop();
+				return;
 			}
+			this.game.stop();
+
 		} else {
 			let diceValue = this.game.roll();
 			diceOutput.innerHTML = diceValue + "\n" + diceOutput.innerHTML;
